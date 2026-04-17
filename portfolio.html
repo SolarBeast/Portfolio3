@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardik Saini | Cybersecurity & Forensics</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --neon-blue: #00f7ff;
+            --neon-pink: #ff004c;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: 'Poppins', sans-serif; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth;
+        }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; }
+
+        /* Navigation */
+        header {
+            padding: 1rem 10%; 
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(15px); 
+            border-bottom: 1px solid var(--border);
+            position: fixed; 
+            width: 100%; 
+            z-index: 1000;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; letter-spacing: 2px; color: white; cursor: default; }
+        .logo span { color: var(--neon-blue); }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { cursor: pointer; color: var(--text); font-size: 0.85rem; text-transform: uppercase; transition: 0.3s; font-family: 'Fira Code'; }
+        .nav-links a:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+
+        /* Hero Section */
+        .hero { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+        }
+        .glitch { 
+            font-size: clamp(3rem, 10vw, 5rem); 
+            font-weight: 800; 
+            color: white; 
+            position: relative; 
+            margin-bottom: 10px;
+        }
+        .glitch::before { 
+            content: attr(data-text); 
+            position: absolute; 
+            left: -2px; 
+            text-shadow: 2px 0 var(--neon-pink); 
+            clip: rect(44px, 450px, 56px, 0); 
+            animation: glitch-anim 5s infinite linear alternate-reverse; 
+        }
+        @keyframes glitch-anim { 
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            100% { clip: rect(70px, 9999px, 12px, 0); }
+        }
+        #typing { font-family: 'Fira Code'; color: var(--neon-blue); font-size: 1.2rem; min-height: 1.5em; }
+
+        .hero-buttons { margin-top: 30px; display: flex; gap: 20px; }
+        .btn-glow { background: var(--neon-blue); color: #020617; padding: 12px 35px; border: none; border-radius: 4px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Poppins'; }
+        .btn-glow:hover { box-shadow: 0 0 25px var(--neon-blue); transform: translateY(-3px); }
+        .btn-outline { background: transparent; border: 1px solid var(--neon-blue); color: var(--neon-blue); padding: 12px 35px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+        .btn-outline:hover { background: rgba(0, 247, 255, 0.1); }
+
+        /* Sections */
+        .section { padding: 100px 10%; text-align: center; opacity: 0; transform: translateY(30px); transition: 1s ease; }
+        .section.visible { opacity: 1; transform: translateY(0); }
+        .section-title { font-size: 2rem; margin-bottom: 40px; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .section-title::before, .section-title::after { content: ""; height: 1px; width: 50px; background: var(--neon-blue); }
+
+        /* Terminal Style About */
+        .terminal-window { max-width: 850px; margin: 0 auto; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; text-align: left; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .terminal-header { background: #1e293b; padding: 12px; display: flex; gap: 8px; align-items: center; }
+        .dot { height: 12px; width: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+        .terminal-title { font-size: 12px; font-family: 'Fira Code'; color: var(--text-dim); margin-left: 10px; }
+        .terminal-body { padding: 30px; font-family: 'Fira Code', monospace; background: rgba(1, 2, 3, 0.8); line-height: 1.8; }
+        .prmpt { color: var(--neon-blue); }
+        .output { color: var(--text-dim); margin-bottom: 15px; }
+        .terminal-list { list-style: none; color: #a5b4fc; margin-left: 20px; }
+
+        /* Skills Tabs */
+        .tab-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; }
+        .tab-btn { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 10px 25px; cursor: pointer; transition: 0.3s; font-family: 'Fira Code'; }
+        .tab-btn.active { background: var(--neon-blue); color: #020617; border-color: var(--neon-blue); font-weight: 600; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        .skill-card { background: var(--glass); border: 1px solid var(--border); padding: 20px; border-radius: 8px; transition: 0.3s; }
+        .skill-card:hover { border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0, 247, 255, 0.1); transform: scale(1.05); }
+
+        /* Projects */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .project-card { 
+            background: var(--glass); 
+            border: 1px solid var(--border); 
+            padding: 35px; 
+            text-align: left; 
+            border-radius: 12px;
+            position: relative;
+            transition: 0.4s;
+        }
+        .project-card:hover { border-color: var(--neon-pink); transform: translateY(-10px); }
+        .tag { font-size: 0.65rem; background: var(--neon-pink); color: white; padding: 4px 12px; border-radius: 20px; font-weight: 800; position: absolute; top: 20px; right: 20px; }
+        .project-card h3 { margin-bottom: 15px; color: var(--neon-blue); font-size: 1.4rem; }
+        .tech-stack { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .tech-stack span { font-size: 0.75rem; color: var(--text-dim); border: 1px solid var(--border); padding: 2px 8px; border-radius: 4px; font-family: 'Fira Code'; }
+
+        /* Footer */
+        footer { padding: 40px; border-top: 1px solid var(--border); background: #010409; text-align: center; font-size: 0.9rem; color: var(--text-dim); }
+        .social-links { margin-top: 20px; display: flex; justify-content: center; gap: 25px; }
+        .social-links a { color: var(--text-dim); font-size: 1.5rem; transition: 0.3s; }
+        .social-links a:hover { color: var(--neon-blue); transform: scale(1.2); }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <header>
+        <nav>
+            <div class="logo">HARDIK<span>.</span>SAINI</div>
+            <ul class="nav-links">
+                <li><a onclick="scrollToSection('home')">Home</a></li>
+                <li><a onclick="scrollToSection('about')">Mission</a></li>
+                <li><a onclick="scrollToSection('skills')">Arsenal</a></li>
+                <li><a onclick="scrollToSection('projects')">Logs</a></li>
+                <li><a onclick="scrollToSection('contact')">Link</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1 class="glitch" data-text="HARDIK SAINI">HARDIK SAINI</h1>
+        <p id="typing"></p>
+        <div class="hero-buttons">
+            <button class="btn-glow" onclick="scrollToSection('projects')">Access Projects</button>
+            <button class="btn-outline" onclick="scrollToSection('contact')">Establish Link</button>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">01_ROOT_ACCESS</h2>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                <div class="terminal-title">hardik@manav-rachna:~ (B.Tech DFCS)</div>
+            </div>
+            <div class="terminal-body">
+                <p><span class="prmpt">guest@hardik:~$</span> cat summary.sh</p>
+                <p class="output">Currently decoding the world of Cybersecurity and Digital Forensics at Manav Rachna University. Passionate about OSINT, hardware security, and building scalable protection software.</p>
+                
+                <p><span class="prmpt">guest@hardik:~$</span> list --hobbies</p>
+                <ul class="terminal-list">
+                    <li>> Percussive Fingerstyle Guitar (Contemporary Pop)</li>
+                    <li>> Japanese Language Mastery (Yoshio Academy | JLPT N5)</li>
+                    <li>> Physical Conditioning (Anytime Fitness | 6-Day Split)</li>
+                </ul>
+                
+                <p><span class="prmpt">guest@hardik:~$</span> check status --language</p>
+                <p class="output">[###########---------] 55% N5 Completion</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <h2 class="section-title">02_THE_ARSENAL</h2>
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="showSkills('sec', this)">Cyber_Security</button>
+            <button class="tab-btn" onclick="showSkills('dev', this)">Dev_Tools</button>
+        </div>
+        <div id="skills-content" class="skills-grid"></div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title">03_PROJECT_LOGS</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="tag">AI SEC</div>
+                <h3>Solar Security</h3>
+                <p>Developing AI-driven security protocols to protect IT infrastructures from unauthorized access and malware gaps.</p>
+                <div class="tech-stack"><span>Python</span> <span>AI Logic</span> <span>Network Sec</span></div>
+            </div>
+            <div class="project-card">
+                <div class="tag">HARDWARE</div>
+                <h3>Arduino RTC System</h3>
+                <p>Engineered a functional digital clock using Arduino Uno and Real-Time Clock modules with I2C communication.</p>
+                <div class="tech-stack"><span>C++</span> <span>Hardware</span> <span>RTC</span> <span>LCD</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="section-title">04_ESTABLISH_LINK</h2>
+        <div class="terminal-window" style="max-width: 500px; margin: 0 auto;">
+            <div class="terminal-body" style="text-align: center;">
+                <p>Email: <span class="prmpt">your.email@mru.edu</span></p>
+                <p>Location: <span class="prmpt">Delhi, India</span></p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fas fa-code"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Hardik Saini | Encrypted Portfolio | Built with HTML, CSS, & JS</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Particle Background
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 70, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00f7ff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00f7ff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } }
+            }
+        });
+
+        // Typing Effect
+        const phrases = ["Cyber Security Analyst", "Digital Forensics Student", "Ethical Hacking Enthusiast", "MATLAB & C Developer"];
+        let i = 0, j = 0, isDeleting = false;
+
+        function type() {
+            let current = phrases[i];
+            let display = isDeleting ? current.substring(0, j--) : current.substring(0, j++);
+            document.getElementById("typing").innerText = `> ${display}_`;
+
+            if (!isDeleting && j > current.length) { isDeleting = true; setTimeout(type, 2000); return; }
+            if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % phrases.length; }
+            
+            setTimeout(type, isDeleting ? 40 : 80);
+        }
+        type();
+
+        // Skill Tab Logic
+        const skillData = {
+            sec: ["Nmap", "Wireshark", "OSINT", "Linux CLI", "CTF Prep", "Digital Forensics", "Packet Tracer"],
+            dev: ["C Programming", "MATLAB", "Arduino (C++)", "HTML5 / CSS3", "JavaScript", "Python", "Data Structures"]
+        };
+
+        function showSkills(category, btn) {
+            const container = document.getElementById("skills-content");
+            container.innerHTML = skillData[category].map(s => `<div class="skill-card">${s}</div>`).join('');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        // Scroll Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Initialize
+        showSkills('sec', document.querySelector('.tab-btn'));
+    </script>
+</body>
+</html>
